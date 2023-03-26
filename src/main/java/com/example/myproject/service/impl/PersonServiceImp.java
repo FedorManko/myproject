@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -37,7 +38,7 @@ public class PersonServiceImp implements PersonService {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> changeFioById(String fio, Integer id) {
+    public ResponseEntity<HttpStatus> changeFioById(String fio, UUID id) {
         Person person = personRepository.findById(id).
                 orElseThrow(() -> new PersonNotFoundException(ErrorMessage.PERSON_NOT_EXISTS));
         person.setFio(fio);

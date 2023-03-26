@@ -17,12 +17,12 @@ import java.util.Objects;
 @Slf4j
 public class LoggingAspect {
 
-    @Pointcut("execution(public * com.example.personorderservice.controller.*.*(..))")
+    @Pointcut("execution(public * com.example.myproject.controller.*.*(..))")
     public void controllerLog() {
         // pointcut body must be empty
     }
 
-    @Pointcut("execution(public * com.example.personorderservice.service.*.*(..))")
+    @Pointcut("execution(public * com.example.myproject.service.*.*(..))")
     public void serviceLog() {
         // pointcut body must be empty
     }

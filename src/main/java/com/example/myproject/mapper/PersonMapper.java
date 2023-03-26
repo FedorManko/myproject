@@ -13,7 +13,6 @@ public interface PersonMapper {
 
     PersonDto toDto(Person person );
     List<PersonDto> toDtoList(List<Person> persons);
-
     Person toPerson(PersonDto personDto);
 
 

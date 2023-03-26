@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/person")
@@ -34,7 +35,6 @@ public class PersonController {
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
     public List<PersonDto> getAllPersons(){
-        Runtime runtime = Runtime.getRuntime();
         return personService.getAllPersons();
     }
 
@@ -56,7 +56,7 @@ public class PersonController {
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
     public void changeFioById(@Fio @RequestParam(value = "fio") String fio,
-                              @PathVariable("id") Integer id){
+                              @PathVariable("id") UUID id){
         personService.changeFioById(fio,id);
     }
 }
