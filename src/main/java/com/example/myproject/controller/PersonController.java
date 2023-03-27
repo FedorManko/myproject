@@ -4,6 +4,7 @@ package com.example.myproject.controller;
 import com.example.myproject.dto.PersonDto;
 import com.example.myproject.service.PersonService;
 import com.example.myproject.validation.annotation.Fio;
+import com.example.myproject.validation.annotation.Uuid;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -56,7 +57,7 @@ public class PersonController {
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
     public void changeFioById(@Fio @RequestParam(value = "fio") String fio,
-                              @PathVariable("id") UUID id){
+                              @Uuid @PathVariable("id") UUID id){
         personService.changeFioById(fio,id);
     }
 }

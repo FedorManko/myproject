@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,6 +39,7 @@ public class PersonServiceImp implements PersonService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<HttpStatus> changeFioById(String fio, UUID id) {
         Person person = personRepository.findById(id).
                 orElseThrow(() -> new PersonNotFoundException(ErrorMessage.PERSON_NOT_EXISTS));
