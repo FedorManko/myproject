@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     Optional<Person> findById(UUID id);
+    void deleteByFio(String fio);
+    Optional<String> findByFio(String fio);
 }

@@ -1,16 +1,20 @@
 package com.example.myproject.validation.impl;
 
 
+import com.example.myproject.repository.PersonRepository;
 import com.example.myproject.validation.annotation.Fio;
+import lombok.RequiredArgsConstructor;
 
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
-
+@RequiredArgsConstructor
 public class FioConstraint implements ConstraintValidator<Fio, String> {
 
     private static final String NAME_PATTERN = "[a-zA-Zа-яА-Я\\s-]{2,30}";
+
+    private final PersonRepository personRepository;
 
     @Override
     public void initialize(Fio constraintAnnotation) {

@@ -13,9 +13,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +25,7 @@ import java.util.UUID;
 @RequestMapping("/person")
 @RequiredArgsConstructor
 @Validated
-@Tag(name = "Person Controller")
+@Tag(name = "Person Controller", description = "Api to work with persons")
 public class PersonController {
 
     private final PersonService personService;
@@ -39,14 +41,15 @@ public class PersonController {
         return personService.getAllPersons();
     }
 
-    @PostMapping()
+    @PostMapping("/save")
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Save new person", description =
             "Endpoint saves new person.")
     @ApiResponse(responseCode = "200", description = "Person was successfully saved ",
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
-    public void savePerson(@RequestBody PersonDto personDTO){
-        personService.savePerson(personDTO);
+    public PersonDto savePerson(@Valid @RequestBody PersonDto personDTO){
+        return personService.savePerson(personDTO);
     }
 
     @PatchMapping("/change/{id}")
@@ -56,8 +59,20 @@ public class PersonController {
     @ApiResponse(responseCode = "200", description = "Name of the person was successfully change",
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
-    public void changeFioById(@Fio @RequestParam(value = "fio") String fio,
-                              @Uuid @PathVariable("id") UUID id){
-        personService.changeFioById(fio,id);
+    public PersonDto changeFioById(@Fio @RequestParam(value = "fio") String fio,
+                                                    @Uuid @PathVariable("id") UUID id){
+       return personService.changeFioById(fio,id);
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Delete person by fio", description =
+            "Endpoint delete person by fio.")
+    @ApiResponse(responseCode = "200", description = "Person was successfully change",
+            content = @Content(mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = PersonDto.class))))
+    public ResponseEntity<HttpStatus> deletePersonByFio(@Fio @RequestParam(value = "fio") String fio){
+        return personService.deletePersonByFio(fio);
+
     }
 }

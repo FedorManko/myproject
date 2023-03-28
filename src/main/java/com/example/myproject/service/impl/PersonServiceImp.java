@@ -8,6 +8,8 @@ import com.example.myproject.repository.PersonRepository;
 import com.example.myproject.service.PersonService;
 import com.example.myproject.service.exception.ErrorMessage;
 import com.example.myproject.service.exception.PersonNotFoundException;
+import com.example.myproject.service.exception.PersonWithSuchNameDontExistsException;
+import com.example.myproject.service.exception.PersonWithSuchNameExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,17 +36,32 @@ public class PersonServiceImp implements PersonService {
     }
 
     @Override
-    public void savePerson(PersonDto personDTO) {
+    @Transactional
+    public PersonDto savePerson(PersonDto personDTO) {
+        if(personRepository.findByFio(personDTO.getFio()).isPresent()){
+            throw new PersonWithSuchNameExistsException(ErrorMessage.PERSON_WITH_SUCH_NAME_EXISTS);
+        }
         personRepository.save(personMapper.toPerson(personDTO));
+        return personDTO;
     }
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> changeFioById(String fio, UUID id) {
-        Person person = personRepository.findById(id).
-                orElseThrow(() -> new PersonNotFoundException(ErrorMessage.PERSON_NOT_EXISTS));
+    public PersonDto changeFioById(String fio, UUID id) {
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(ErrorMessage.PERSON_NOT_EXISTS));
         person.setFio(fio);
         personRepository.save(person);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return personMapper.toDto(person);
+    }
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> deletePersonByFio(String fio) {
+        if(personRepository.findByFio(fio).isPresent()) {
+            personRepository.deleteByFio(fio);
+            return ResponseEntity.ok(HttpStatus.OK);
+        } else {
+            throw new PersonWithSuchNameDontExistsException(ErrorMessage.PERSON_WITH_SUCH_NAME_DONT_EXISTS);
+        }
+
     }
 }

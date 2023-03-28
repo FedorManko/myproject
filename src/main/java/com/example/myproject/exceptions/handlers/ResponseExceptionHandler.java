@@ -2,10 +2,8 @@ package com.example.myproject.exceptions.handlers;
 
 import com.example.myproject.dto.ErrorExtension;
 import com.example.myproject.dto.ErrorResponse;
-import com.example.myproject.service.exception.ErrorCode;
+import com.example.myproject.service.exception.*;
 
-import com.example.myproject.service.exception.ErrorMessage;
-import com.example.myproject.service.exception.PersonNotFoundException;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -68,10 +66,24 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, SERVICE_UNAVAILABLE);
     }
     @ExceptionHandler(PersonNotFoundException.class)
-    public ResponseEntity<ErrorExtension> handleClientNotFoundException(Exception ex) {
+    public ResponseEntity<ErrorExtension> handlePersonNotFoundException(Exception ex) {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
                 ErrorCode.PERSON_NOT_FOUND);
+        return new ResponseEntity<>(body, NOT_FOUND);
+    }
+    @ExceptionHandler(PersonWithSuchNameDontExistsException.class)
+    public ResponseEntity<ErrorExtension> handlePersonWithSuchNameDontExistsException(Exception ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                ErrorCode.PERSON_WITH_SUCH_NAME_DONT_EXISTS);
+        return new ResponseEntity<>(body, NOT_FOUND);
+    }
+    @ExceptionHandler(PersonWithSuchNameExistsException.class)
+    public ResponseEntity<ErrorExtension> handlePersonWithSuchNameExistsException(Exception ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                ErrorCode.PERSON_WITH_SUCH_NAME_EXISTS);
         return new ResponseEntity<>(body, NOT_FOUND);
     }
 }

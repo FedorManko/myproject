@@ -11,8 +11,8 @@ import java.util.UUID;
 public interface PersonService {
 
     List<PersonDto> getAllPersons();
-    void savePerson(PersonDto personDTO);
-    ResponseEntity<HttpStatus> changeFioById(String fio, UUID id);
+    PersonDto savePerson(PersonDto personDTO);
+    PersonDto changeFioById(String fio, UUID id);
 
-
+    ResponseEntity<HttpStatus> deletePersonByFio(String fio);
 }
