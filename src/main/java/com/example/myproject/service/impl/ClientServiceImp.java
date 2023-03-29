@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,10 +70,10 @@ public class ClientServiceImp implements ClientService {
 
     }
 
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Client loadClientByLogin(String login) throws UsernameNotFoundException {
-//        return clientRepository.findByLogin(login)
-//                .orElseThrow(() -> new ClientNotFoundException(String.format("Unknown user %s", login)));
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public Client loadClientByLogin(String login) throws UsernameNotFoundException {
+        return clientRepository.findByLogin(login)
+                .orElseThrow(() -> new ClientNotFoundException(String.format("Unknown user %s", login)));
+    }
 }

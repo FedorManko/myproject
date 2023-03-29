@@ -16,5 +16,5 @@ public interface ClientService {
 
     ResponseEntity<HttpStatus> deleteClientByFio(String fio);
 
-   // Client loadClientByLogin(String login);
+    Client loadClientByLogin(String login);
 }

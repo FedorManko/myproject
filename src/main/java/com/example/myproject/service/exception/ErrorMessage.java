@@ -7,4 +7,5 @@ public class ErrorMessage {
     public static final String CLIENT_WITH_SUCH_NAME_EXISTS = "Client with this name exists";
 
     public static final String TOKEN_INVALID_MESS = "JWT access token invalid or expired";
+    public static final String CLIENT_WITH_THIS_PHONE_EXISTS = "Client with such mobile phone is already exists";
 }

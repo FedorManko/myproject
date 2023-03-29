@@ -1,7 +1,7 @@
 package com.example.myproject.dto;
 
 import com.example.myproject.entity.ClientStatus;
-import com.example.myproject.entity.UserProfile;
+//import com.example.myproject.entity.UserProfile;
 import com.example.myproject.validation.annotation.Age;
 import com.example.myproject.validation.annotation.Fio;
 import com.example.myproject.validation.annotation.PhoneNumber;
