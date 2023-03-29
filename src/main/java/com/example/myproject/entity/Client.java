@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "person")
+@Table(name = "client")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Person {
+public class Client {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",strategy ="com.example.myproject.generator.UuidTimeSequenceGenerator" )
+    @GenericGenerator(name = "UUID",strategy ="org.hibernate.id.UUIDGenerator" )
     @Column(name = "id")
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
@@ -27,8 +27,18 @@ public class Person {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "mobile_phone")
+    private String mobilePhone;
+
+    @Column(name = "client_status")
+    @Enumerated(EnumType.STRING)
+    private ClientStatus clientStatus;
+
     @Column(name = "profession")
     @Enumerated(value = EnumType.STRING)
     private Profession profession;
+
+    @OneToOne(mappedBy = "client", orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private UserProfile userProfile;
 
 }

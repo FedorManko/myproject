@@ -16,7 +16,13 @@ spring:
     url: ${datasource.url:jdbc:postgresql://localhost:5432/person}
     username: ${datasource.username:postgres}
     password: ${datasource.password:postgres}
-
+jwt:
+  secret:
+    access: ${secret.access:aaaaaa}
+    refresh: ${secret.refresh:bbbbbbb}
+  expiration:
+    access: 10000000
+    refresh: 30000000
 
 springdoc:
   api-docs:

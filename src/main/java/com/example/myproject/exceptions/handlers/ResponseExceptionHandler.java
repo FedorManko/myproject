@@ -65,25 +65,25 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 SERVICE_UNAVAILABLE.name().toLowerCase());
         return new ResponseEntity<>(body, SERVICE_UNAVAILABLE);
     }
-    @ExceptionHandler(PersonNotFoundException.class)
-    public ResponseEntity<ErrorExtension> handlePersonNotFoundException(Exception ex) {
+    @ExceptionHandler(ClientNotFoundException.class)
+    public ResponseEntity<ErrorExtension> handleClientNotFoundException(Exception ex) {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
-                ErrorCode.PERSON_NOT_FOUND);
+                ErrorCode.CLIENT_NOT_FOUND);
         return new ResponseEntity<>(body, NOT_FOUND);
     }
-    @ExceptionHandler(PersonWithSuchNameDontExistsException.class)
-    public ResponseEntity<ErrorExtension> handlePersonWithSuchNameDontExistsException(Exception ex) {
+    @ExceptionHandler(ClientWithSuchNameDontExistsException.class)
+    public ResponseEntity<ErrorExtension> handleClientWithSuchNameDontExistsException(Exception ex) {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
-                ErrorCode.PERSON_WITH_SUCH_NAME_DONT_EXISTS);
+                ErrorCode.CLIENT_WITH_SUCH_NAME_DONT_EXISTS);
         return new ResponseEntity<>(body, NOT_FOUND);
     }
-    @ExceptionHandler(PersonWithSuchNameExistsException.class)
-    public ResponseEntity<ErrorExtension> handlePersonWithSuchNameExistsException(Exception ex) {
+    @ExceptionHandler(ClientWithSuchNameExistsException.class)
+    public ResponseEntity<ErrorExtension> handleClientWithSuchNameExistsException(Exception ex) {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
-                ErrorCode.PERSON_WITH_SUCH_NAME_EXISTS);
+                ErrorCode.CLIENT_WITH_SUCH_NAME_EXISTS);
         return new ResponseEntity<>(body, NOT_FOUND);
     }
 }
