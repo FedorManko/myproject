@@ -51,6 +51,7 @@ class ClientServiceImpTest {
 
     @Test
     void saveClient() {
+        Client client = EntityCreator.getClient();
     }
 
     @Test

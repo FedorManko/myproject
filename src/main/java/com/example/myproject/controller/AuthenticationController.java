@@ -6,6 +6,7 @@ import com.example.myproject.dto.JwtTokenResponseDto;
 import com.example.myproject.dto.TokenRefreshRequest;
 import com.example.myproject.dto.UserAuthRequestDto;
 import com.example.myproject.service.AuthenticationService;
+import com.example.myproject.validation.annotation.JwtToken;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -13,7 +14,6 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -65,8 +65,8 @@ public class AuthenticationController {
                     schema = @Schema(implementation = ErrorExtension.class))
     })
 
-    public JwtTokenResponseDto refreshJwtToken(@RequestBody TokenRefreshRequest refreshTokenDto) {
-        return authService.refreshAccessToken(refreshTokenDto.getRefreshToken());
+    public JwtTokenResponseDto refreshJwtToken(@JwtToken @RequestParam String refreshTokenDto) {
+        return authService.refreshAccessToken(refreshTokenDto);
     }
 
 }
