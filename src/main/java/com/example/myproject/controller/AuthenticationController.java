@@ -65,7 +65,7 @@ public class AuthenticationController {
                     schema = @Schema(implementation = ErrorExtension.class))
     })
 
-    public JwtTokenResponseDto refreshJwtToken(TokenRefreshRequest refreshTokenDto) {
+    public JwtTokenResponseDto refreshJwtToken(@RequestBody TokenRefreshRequest refreshTokenDto) {
         return authService.refreshAccessToken(refreshTokenDto.getRefreshToken());
     }
 

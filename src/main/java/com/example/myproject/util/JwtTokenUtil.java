@@ -69,18 +69,6 @@ public class JwtTokenUtil {
         return true;
     }
 
-    public Claims getAccessClaims(@NonNull String token) {
-        return getClaims(token, jwtAccessSecret);
-    }
-
-    public Claims getRefreshClaims(@NonNull String token) {
-        return getClaims(token, jwtRefreshSecret);
-    }
-
-    private Claims getClaims(@NonNull String token, @NonNull String secret) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-    }
-
     public String getLoginFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(jwtAccessSecret).parseClaimsJws(token).getBody();
         return claims.getSubject();
