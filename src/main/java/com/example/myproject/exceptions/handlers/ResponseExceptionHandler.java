@@ -86,4 +86,12 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 ErrorCode.CLIENT_WITH_SUCH_NAME_EXISTS);
         return new ResponseEntity<>(body, NOT_FOUND);
     }
+
+    @ExceptionHandler(ClientAlreadyRegisteredException.class)
+    public ResponseEntity<ErrorExtension> handleClientAlreadyRegisteredException(Exception ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                ErrorCode.CLIENT_ALREADY_REGISTERED_EXCEPTION);
+        return new ResponseEntity<>(body, NOT_FOUND);
+    }
 }

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public class ClientController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
+    @SecurityRequirement(name = "authBearer")
     @Operation(summary = "Request for all clients", description =
             "Endpoint returns all branches.")
     @ApiResponse(responseCode = "200", description = "Clients list was successfully returned",
@@ -42,7 +44,8 @@ public class ClientController {
     }
 
     @PostMapping("/save")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
+    @SecurityRequirement(name = "authBearer")
     @Operation(summary = "Save new client", description =
             "Endpoint saves new client.")
     @ApiResponse(responseCode = "200", description = "Client was successfully saved ",
@@ -54,6 +57,7 @@ public class ClientController {
 
     @PatchMapping("/change/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @SecurityRequirement(name = "authBearer")
     @Operation(summary = "Change name of client by id", description =
             "Endpoint changes client name by id.")
     @ApiResponse(responseCode = "200", description = "Name of the client was successfully change",
@@ -66,6 +70,7 @@ public class ClientController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
+    @SecurityRequirement(name = "authBearer")
     @Operation(summary = "Delete client by fio", description =
             "Endpoint delete client by fio.")
     @ApiResponse(responseCode = "200", description = "Client was successfully delete",

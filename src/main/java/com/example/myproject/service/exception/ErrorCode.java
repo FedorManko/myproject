@@ -6,4 +6,6 @@ public class ErrorCode {
     public static final String INVALID_PATH_VARIABLE = "invalid_path_variable";
     public static final String CLIENT_WITH_SUCH_NAME_DONT_EXISTS = "client_with_such_name_dont_exists";
     public static final String CLIENT_WITH_SUCH_NAME_EXISTS = "client_with_such_name_exists";
+
+    public static final String CLIENT_ALREADY_REGISTERED_EXCEPTION = "client_already_registered_Exception";
 }

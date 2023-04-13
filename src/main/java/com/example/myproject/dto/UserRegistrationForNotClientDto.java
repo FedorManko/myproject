@@ -1,11 +1,10 @@
 package com.example.myproject.dto;
 
 
-import com.example.myproject.validation.annotation.Password;
-import com.example.myproject.validation.annotation.PhoneNumber;
-import com.example.myproject.validation.annotation.SecurityQuestionAnswer;
+import com.example.myproject.validation.annotation.*;
 import lombok.Value;
 
+import javax.persistence.criteria.CriteriaBuilder;
 
 
 @Value
@@ -19,4 +18,10 @@ public class UserRegistrationForNotClientDto {
     String securityQuestion;
     @SecurityQuestionAnswer
     String securityAnswer;
+    @Fio
+    String fio;
+    @Age
+    Integer age;
+    @Professions
+    String profession;
 }

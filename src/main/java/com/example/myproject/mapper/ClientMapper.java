@@ -2,7 +2,6 @@ package com.example.myproject.mapper;
 
 
 import com.example.myproject.dto.ClientDto;
-import com.example.myproject.dto.UserInformationDto;
 import com.example.myproject.dto.UserRegistrationForNotClientDto;
 import com.example.myproject.entity.Client;
 import org.mapstruct.Mapper;

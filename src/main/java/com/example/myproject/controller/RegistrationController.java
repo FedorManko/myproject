@@ -34,7 +34,7 @@ public class RegistrationController {
             @ApiResponse(responseCode = "201", description = "New client has been successfully registered",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserAfterSuccessRegistrationForNotClientDto.class))),
-            @ApiResponse(responseCode = "409", description = "Can't create profile for client if phone number or passport number is already registered",
+            @ApiResponse(responseCode = "409", description = "Can't create profile for client if phone number is already registered",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorExtension.class)))
     })
