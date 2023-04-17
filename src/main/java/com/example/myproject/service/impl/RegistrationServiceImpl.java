@@ -37,6 +37,14 @@ public class RegistrationServiceImpl implements RegistrationService {
                 userProfile.getClient());
     }
 
+    public void checkExistsByPhonePublic(String phone) {
+        checkExistsByPhone(phone);
+    }
+
+    public void passwordEncoderPublic(String password, UserProfile userProfile){
+        passwordEncoder(password,userProfile);
+    }
+
     private void checkExistsByPhone(String phone) {
         Optional.ofNullable(clientRepository.findByLogin(phone))
                 .filter(Optional::isEmpty)
@@ -44,6 +52,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
     private void passwordEncoder(String password, UserProfile userProfile) {
         userProfile.setPassword(passwordEncoder.encode(password));
+    }
+    public UserProfile notClientMapperPublic(UserRegistrationForNotClientDto userRegistrationForNotClientDto){
+        return notClientMapper(userRegistrationForNotClientDto);
     }
 
     private UserProfile notClientMapper(UserRegistrationForNotClientDto userRegistrationForNotClientDto) {

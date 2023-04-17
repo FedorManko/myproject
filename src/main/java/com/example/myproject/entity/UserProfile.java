@@ -21,7 +21,7 @@ public class UserProfile {
     private UUID id;
 
     @Column(name = "sms_notification")
-    private boolean smsNotification;
+    private Boolean smsNotification;
 
     @Column(name = "password")
     private String password;

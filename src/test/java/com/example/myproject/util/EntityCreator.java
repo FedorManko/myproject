@@ -1,10 +1,8 @@
 package com.example.myproject.util;
 
-import com.example.myproject.entity.Client;
-import com.example.myproject.entity.ClientStatus;
-import com.example.myproject.entity.Profession;
-import com.example.myproject.entity.UserProfile;
+import com.example.myproject.entity.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class EntityCreator {
@@ -22,6 +20,19 @@ public class EntityCreator {
                 ClientStatus.ACTIVE,
                 Profession.STUDENT,
                 new UserProfile()
+        );
+    }
+    public static UserProfile getUserProfile(){
+        return new UserProfile(
+                UUID.randomUUID(),
+                true,
+                "foka",
+                "foka@mail.com",
+                "Cat name?",
+                "Marlik",
+                LocalDate.now(),
+                UserRole.USER,
+                getClient()
         );
     }
 }
